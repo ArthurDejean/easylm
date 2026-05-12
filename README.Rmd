@@ -26,7 +26,7 @@ The goal of easylm is to provide a limited number of functions to analyze linear
 You can install the development version of easylm like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("ArthurDejean/easylm")
 ```
 
 ## Example
