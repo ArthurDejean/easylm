@@ -1,0 +1,201 @@
+# Workflow de développement et mise à jour d’un package R sur GitHub
+
+## 1. Modifier une fonction du package
+
+Exemple :
+
+``` r
+R/lm_sum.R
+```
+
+Modifier le code de la fonction dans le dossier `R/` du package.
+
+------------------------------------------------------------------------
+
+## 2. Mettre à jour la documentation
+
+Dans R :
+
+``` r
+devtools::document()
+```
+
+Cette commande met à jour automatiquement :
+
+-   `NAMESPACE`
+-   les fichiers de documentation `man/*.Rd`
+
+------------------------------------------------------------------------
+
+## 3. Recharger le package localement
+
+``` r
+devtools::load_all()
+```
+
+Cela recharge immédiatement :
+
+-   les fonctions
+-   la documentation
+-   les méthodes
+-   les exports
+
+------------------------------------------------------------------------
+
+## 4. Tester les fonctions
+
+Exemple :
+
+``` r
+lm_sum(model)
+```
+
+ou :
+
+``` r
+?lm_sum
+```
+
+------------------------------------------------------------------------
+
+## 5. Vérifier les changements Git
+
+Dans le terminal :
+
+``` bash
+git status
+```
+
+Permet de voir :
+
+-   les fichiers modifiés
+-   les nouveaux fichiers
+-   les fichiers non suivis
+
+------------------------------------------------------------------------
+
+## 6. Ajouter les fichiers modifiés
+
+``` bash
+git add .
+```
+
+------------------------------------------------------------------------
+
+## 7. Créer un commit
+
+``` bash
+git commit -m "Update lm_sum function"
+```
+
+Le message doit décrire clairement la modification.
+
+------------------------------------------------------------------------
+
+## 8. Envoyer les modifications sur GitHub
+
+``` bash
+git push
+```
+
+Le dépôt GitHub est maintenant mis à jour.
+
+------------------------------------------------------------------------
+
+# Workflow complet recommandé
+
+## Dans R
+
+``` r
+devtools::document()
+devtools::load_all()
+```
+
+## Dans le terminal Git
+
+``` bash
+git status
+git add .
+git commit -m "Description de la modification"
+git push
+```
+
+------------------------------------------------------------------------
+
+# Mise à jour de la version du package
+
+Dans le fichier `DESCRIPTION` :
+
+``` text
+Version: 0.1.0
+```
+
+Peut devenir :
+
+``` text
+Version: 0.1.1
+```
+
+Bonne pratique : incrémenter la version à chaque modification importante.
+
+Automatisation possible :
+
+``` r
+usethis::use_version_patch()
+```
+
+------------------------------------------------------------------------
+
+# Installation de la nouvelle version depuis GitHub
+
+Les utilisateurs devront réinstaller le package :
+
+``` r
+devtools::install_github("TON_PSEUDO/easylm")
+```
+
+Puis charger le package :
+
+``` r
+library(easylm)
+```
+
+------------------------------------------------------------------------
+
+# Conseils pratiques
+
+## Toujours lancer :
+
+``` r
+devtools::document()
+```
+
+avant un `git push`.
+
+------------------------------------------------------------------------
+
+## Éviter de modifier directement les objets du Global Environment
+
+Préférer :
+
+``` r
+devtools::load_all()
+```
+
+plutôt que :
+
+``` r
+source("R/mafonction.R")
+```
+
+pour éviter les incohérences entre :
+
+-   les fonctions du package
+-   et celles du Global Environment.
+
+------------------------------------------------------------------------
+
+# Structure minimale correcte d’un package
+
+``` t
+```
