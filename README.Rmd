@@ -1,5 +1,7 @@
 ---
 output: github_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -15,11 +17,11 @@ knitr::opts_chunk$set(
 
 # easylm
 
-<!-- badges: start -->
-
-<!-- badges: end -->
-
 The goal of easylm is to provide a limited number of functions to analyze linear models.
+
+-   lm_check() allow for a single function call to check linear models assumptions and to look for outliers.
+
+-   lm_sum() allow for a single function call to give the usual anova statistics but also effect sizes and 95% confidence interval.
 
 ## Installation
 
@@ -29,27 +31,43 @@ You can install the development version of easylm like so:
 devtools::install_github("ArthurDejean/easylm")
 ```
 
+For the functions of this package to work, you need to install these fairly common packages in data analysis.
+
+Here is a simple script to install them in your personal R environment :
+
+``` r
+packages = c("tidyverse", "knitr", "stats", "car", "lmtest", "tseries", "rsq", "broom", "gt", "patchwork")
+
+for (element in packages) {
+  if (require(element, character.only=T) == FALSE) {
+    install.packages(element)
+    require(element, character.only=T)
+  } else {
+    require(element, character.only=T)
+  }
+}
+
+rm(packages,element)
+```
+
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example of use of the two functions of this package
 
 ```{r example}
 library(easylm)
-## basic example code
+M = lm(qsec~hp, mtcars)
+lm_check(M)
+#According to the Bonferroni test for outliers, Merc 230 is an outlier.
+
+M = lm(qsec~hp, subset(mtcars, rownames(mtcars) != "Merc 230"))
+lm_check(M) # we are going to ignore the independency of residuals issue for this example.
+
+lm_sum(M)
+
+#If you want to display this tab in a plot
+lm_sum(M, plot = TRUE)
+
+#If you want the predictors statistics only
+lm_sum(M, plot = TRUE, type = "pred")
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.

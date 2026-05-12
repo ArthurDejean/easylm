@@ -1,10 +1,14 @@
-#' Cette fonction vérifie les conditions d'application d'un modèle linéaire : normalité, homoscédasticité et indépendance des résidus. De plus, cette fonction réalise une analyse complète des outliers.
+#' This function checks the assumptions for a linear model: normality, homoscedasticity, and independence of the residuals. In addition, this function performs a comprehensive analysis of outliers.
 #'
-#' @param model modèle linéaire. Objet R de type "lm" exclusivement.
+#' @param model Linear model. type "lm" only.
 #'
 #' @export
 lm_check = function(model) {
-  require(knitr, include.only="kable")
+  require(knitr, include.only = "kable")
+  require(tseries, include.only = "jarque.bera.test")
+  require(lmtest, include.only = "bptest")
+  require(car, include.only = c("durbinWatsonTest", "outlierTest"))
+  require(stats, include.only = c("hatvalues", "rstudent", "cooks.distance"))
   checks = data.frame(matrix(nrow=3, ncol=1))
   checks$matrix.nrow...3..ncol...1. = c("Jarque-Bera", "Breusch-Pagan", "Durbin-Watson")
   checks$statistic = c(jarque.bera.test(model$res)[1], bptest(model)[1], durbinWatsonTest(model)[2])

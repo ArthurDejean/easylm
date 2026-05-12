@@ -2,13 +2,13 @@
 % Please edit documentation in R/lm_check.R
 \name{lm_check}
 \alias{lm_check}
-\title{Cette fonction vérifie les conditions d'application d'un modèle linéaire : normalité, homoscédasticité et indépendance des résidus. De plus, cette fonction réalise une analyse complète des outliers.}
+\title{This function checks the assumptions for a linear model: normality, homoscedasticity, and independence of the residuals. In addition, this function performs a comprehensive analysis of outliers.}
 \usage{
 lm_check(model)
 }
 \arguments{
-\item{model}{modèle linéaire. Objet R de type "lm" exclusivement.}
+\item{model}{Linear model. type "lm" only.}
 }
 \description{
-Cette fonction vérifie les conditions d'application d'un modèle linéaire : normalité, homoscédasticité et indépendance des résidus. De plus, cette fonction réalise une analyse complète des outliers.
+This function checks the assumptions for a linear model: normality, homoscedasticity, and independence of the residuals. In addition, this function performs a comprehensive analysis of outliers.
 }

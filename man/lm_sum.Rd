@@ -2,17 +2,17 @@
 % Please edit documentation in R/lm_sum.R
 \name{lm_sum}
 \alias{lm_sum}
-\title{Cette fonction affiche toutes les statistiques essentielles d'un modèle linéaire classique ou robuste dans un dataframe concis et ordonné}
+\title{This function displays all the essential statistics for a standard or robust linear model in a concise, well-organized dataframe}
 \usage{
 lm_sum(model, plot = F, type = "full")
 }
 \arguments{
-\item{model}{modèle "lm" ou "lm_robust"}
+\item{model}{Linear model of type "lm" or "lm_robust"}
 
-\item{plot}{Par défaut F. F : La sortie est un objet R de type dataframe ; T = la sortie est un plot.}
+\item{plot}{Default FALSE. FALSE : output is a dataframe displayed in console ; TRUE = output is a Rplot object.}
 
-\item{type}{Par défaut "full". "full" : affiche en sortie les staistiques pour chacun des prédicteurs du modèle et celles du modèle entier ; "pred" : n'affiche que les statistiques des prédicteurs ; "mod" : n'affiche que les statistiques du modèle entier.}
+\item{type}{Default "full. "full" : displays statistics for each of the model's predictors and for the full model ; "pred" : displays the predictors statistics only ; "mod" : displays the full model statistics only.}
 }
 \description{
-Cette fonction affiche toutes les statistiques essentielles d'un modèle linéaire classique ou robuste dans un dataframe concis et ordonné
+This function displays all the essential statistics for a standard or robust linear model in a concise, well-organized dataframe
 }
