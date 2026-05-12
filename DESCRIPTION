@@ -1,0 +1,11 @@
+Package: easylm
+Title: Less Functions, More Outputs (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Arthur", "Dejean", , "arthur.dejean-de-la-batie@etu.u-paris.fr", role = c("aut", "cre"))
+Description: This package gathers linear model analysis steps in a limited number of functions. Outputs are concise, tidy, and displayed in a comprehensive and ergonomic manner.
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
