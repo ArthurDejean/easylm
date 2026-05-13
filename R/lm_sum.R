@@ -48,8 +48,8 @@ lm_sum = function(model, plot = F, type = "full") {
       }
     }
     if (plot == T) {
-      tmp1 = tmp1 |> gt() |> wrap_table()
-      tmp2 = tmp2 |> gt() |> wrap_table()
+      tmp1 = tmp1 |> gt() |> wrap_table(space = "free_x")
+      tmp2 = tmp2 |> gt() |> wrap_table(space = "free_x")
       if (type == "full") {
         return(tmp1 + tmp2 + plot_layout(nrow = 2))
       }
@@ -91,8 +91,8 @@ lm_sum = function(model, plot = F, type = "full") {
       }
     }
     if (plot == T) {
-      tmp1 = tmp1 |> gt() |> wrap_table()
-      tmp2 = tmp2 |> gt() |> wrap_table()
+      tmp1 = tmp1 |> gt() |> wrap_table(space = "free_x")
+      tmp2 = tmp2 |> gt() |> wrap_table(space = "free_x")
       if (type == "full") {
         return(tmp1 + tmp2 + plot_layout(nrow = 2))
       }
