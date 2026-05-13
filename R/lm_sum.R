@@ -9,7 +9,7 @@
 #' @export
 lm_sum = function(model, plot = F, type = "full") {
   require(rsq, include.only="rsq.partial")
-  require(broom, include.only="tidy")
+  require(broom, include.only=c("tidy", "glance"))
   require(knitr, include.only = c("kable", "kables"))
   require(gt, include.only = "gt")
   require(patchwork, include.only = c("wrap_table", "plot_layout"))
@@ -28,8 +28,8 @@ lm_sum = function(model, plot = F, type = "full") {
     colnames(tmp1) = c("predictors", "estimates", "std. error", "t-value", "p-value", "sign", "rsq", "2.5 %", "97.5 %")
     rownames(tmp1) = 1:length(tmp1$predictors)
     tmp2 = data.frame(
-      names = c("F-statistic", "num df", "denom df", "multiple rsq", "adjusted rsq"),
-      values = round(c(sum$fstatistic, sum$r.squared, sum$adj.r.squared), digits = 3)
+      names = c("F-statistic", "num df", "denom df", "p-value", "multiple rsq", "adjusted rsq"),
+      values = round(c(sum$fstatistic, glance(model)$p.value, sum$r.squared, sum$adj.r.squared), digits = 3)
     )
     if (plot == F) {
       if (type == "full") {
@@ -71,8 +71,8 @@ lm_sum = function(model, plot = F, type = "full") {
     colnames(tmp1) = c("predictors", "estimates", "std. error", "t-value", "p-value", "2.5 %", "97.5 %", "rsq", "sign")
     tmp1 = subset(tmp1, select = c("predictors", "estimates", "std. error", "t-value", "p-value", "sign", "rsq", "2.5 %", "97.5 %"))
     tmp2 = data.frame(
-      names = c("F-statistic", "num df", "denom df", "multiple rsq", "adjusted rsq"),
-      values = round(c(model$fstatistic, model$r.squared, model$adj.r.squared), digits = 3)
+      names = c("F-statistic", "num df", "denom df", "p-value", "multiple rsq", "adjusted rsq"),
+      values = round(c(model$fstatistic, glance(model)$p.value, model$r.squared, model$adj.r.squared), digits = 3)
     )
     if (plot == F) {
       if (type == "full") {
