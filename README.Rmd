@@ -56,18 +56,45 @@ This is a basic example of use of the two functions of this package
 
 ```{r example}
 library(easylm)
-M = lm(qsec~hp, mtcars)
-lm_check(M)
-#According to the Bonferroni test for outliers, Merc 230 is an outlier.
 
-M = lm(qsec~hp, subset(mtcars, rownames(mtcars) != "Merc 230"))
-lm_check(M) # we are going to ignore the independency of residuals issue for this example.
+M = lm(mpg~cyl, mtcars) #i.e., does the gas consumption of a car depends on its number of motor cylinder ?
+lm_check(M)
+#According to the Jarque-Bera test, residuals are not dsitributed normally.
+#According to the Bonferroni test for outliers, and its studentized residual, the Toyota Corolla can be considered an outlier.
+
+M = lm(mpg~cyl, subset(mtcars, !(rownames(mtcars) %in% "Toyota Corolla")))
+lm_check(M)
+#According to the Bonferroni test for outliers for this new model, the Fiat 128 could be considered an outlier.
+
+M = lm(mpg~cyl, subset(mtcars, !(rownames(mtcars) %in% c("Toyota Corolla", "Fiat 128"))))
+lm_check(M)
+# This model looks decent enough.
 
 lm_sum(M)
+#Gas consumption does indeed depend on the number of cylinder of a car, according to this dataset, t(28) = -8.92, p < .001, R² = .74, CI 95% [-3.10, -1.94]. 
 
 #If you want to display this tab in a plot
 lm_sum(M, plot = TRUE)
 
 #If you want the predictors statistics only
 lm_sum(M, plot = TRUE, type = "pred")
+
+#You can combine this plot with others to have an complete insight
+library(ggplot2)
+plot = ggplot(mtcars, aes(y = mpg, x = cyl)) +
+  geom_point(position = position_jitter(w = .1)) +
+  geom_smooth(method = "lm") +
+  theme_classic()
+
+tab = lm_sum(M, plot = TRUE, type = "pred")
+
+layout = "
+A
+A
+A
+A
+B
+"
+
+plot + tab + patchwork::plot_layout(nrow = 2, design = layout)
 ```

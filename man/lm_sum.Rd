@@ -13,6 +13,9 @@ lm_sum(model, plot = F, type = "full")
 
 \item{type}{Default "full. "full" : displays statistics for each of the model's predictors and for the full model ; "pred" : displays the predictors statistics only ; "mod" : displays the full model statistics only.}
 }
+\value{
+Either a table in your console or a R plot object depending on parameters.
+}
 \description{
 This function displays all the essential statistics for a standard or robust linear model in a concise, well-organized dataframe
 }

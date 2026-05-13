@@ -9,6 +9,9 @@ lm_check(model)
 \arguments{
 \item{model}{Linear model. type "lm" only.}
 }
+\value{
+In the console , the first table displays a summary of common tests for normality of residuals distribution (Jarque-Bera test), for homoscedasticity (Breusch-Pagan test) and for residuals independency (Durbin-Watson test). The second table displays the 10 greatest leverages, studentized residuals and Cook's distances of residuals for outliers searching. The Bonferroni test for outliers based on studentized residuals is provided for additional insight. Besides these console outputs, four plots are simultaneously displayed in the plot viewer pane : a QQ plot for complementary normality assumption check, a Residuals vs Fitted plot and Scale-location plot for complementary homoscedasticity assumption check, and a Residuals vs Leverage plot for highlighting outliers.
+}
 \description{
 This function checks the assumptions for a linear model: normality, homoscedasticity, and independence of the residuals. In addition, this function performs a comprehensive analysis of outliers.
 }
