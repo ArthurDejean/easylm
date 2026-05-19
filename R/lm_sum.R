@@ -71,7 +71,7 @@ lm_sum = function(model, plot = F, type = "full") {
     )
     colnames(tmp1) = c("predictors", "estimates", "std. error", "t-value", "p-value", "2.5 %", "97.5 %", "df", "rsq", "sign")
     tmp1 = subset(tmp1, select = c("predictors", "estimates", "std. error", "t-value", "df", "p-value", "sign", "rsq", "2.5 %", "97.5 %"))
-    tmp2 = data.frame(`F-statistic` = sum$fstatistic[1], `num df` = sum$fstatistic[2], `denom df` = sum$fstatistic[3], `p-value` = glance(model)$p.value, `multiple rsq` = sum$r.squared, `adjusted rsq` = sum$adj.r.squared)
+    tmp2 = data.frame(`F-statistic` = model$fstatistic[1], `num df` = model$fstatistic[2], `denom df` = model$fstatistic[3], `p-value` = glance(model)$p.value, `multiple rsq` = model$r.squared, `adjusted rsq` = model$adj.r.squared)
     if (plot == F) {
       if (type == "full") {
         print(kable(tmp1, digits = 3, caption = "Each predictor statistics"))
