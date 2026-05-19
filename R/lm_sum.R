@@ -31,10 +31,7 @@ lm_sum = function(model, plot = F, type = "full") {
     colnames(tmp1) = c("predictors", "estimates", "std. error", "t-value", "p-value", "df", "sign", "rsq", "2.5 %", "97.5 %")
     tmp1 = subset(tmp1, select = c("predictors", "estimates", "std. error", "t-value", "df", "p-value", "sign", "rsq", "2.5 %", "97.5 %"))
     rownames(tmp1) = 1:length(tmp1$predictors)
-    tmp2 = data.frame(
-      names = c("F-statistic", "num df", "denom df", "p-value", "multiple rsq", "adjusted rsq"),
-      values = round(c(sum$fstatistic, glance(model)$p.value, sum$r.squared, sum$adj.r.squared), digits = 3)
-    )
+    tmp2 = data.frame(`F-statistic` = sum$fstatistic[1], `num df` = sum$fstatistic[2], `denom df` = sum$fstatistic[3], `p-value` = glance(model)$p.value, `multiple rsq` = sum$r.squared, `adjusted rsq` = sum$adj.r.squared)
     if (plot == F) {
       if (type == "full") {
         print(kable(tmp1, digits = 3, caption = "Each predictor statistics"))
@@ -74,10 +71,7 @@ lm_sum = function(model, plot = F, type = "full") {
     )
     colnames(tmp1) = c("predictors", "estimates", "std. error", "t-value", "p-value", "2.5 %", "97.5 %", "df", "rsq", "sign")
     tmp1 = subset(tmp1, select = c("predictors", "estimates", "std. error", "t-value", "df", "p-value", "sign", "rsq", "2.5 %", "97.5 %"))
-    tmp2 = data.frame(
-      names = c("F-statistic", "num df", "denom df", "p-value", "multiple rsq", "adjusted rsq"),
-      values = round(c(model$fstatistic, glance(model)$p.value, model$r.squared, model$adj.r.squared), digits = 3)
-    )
+    tmp2 = data.frame(`F-statistic` = sum$fstatistic[1], `num df` = sum$fstatistic[2], `denom df` = sum$fstatistic[3], `p-value` = glance(model)$p.value, `multiple rsq` = sum$r.squared, `adjusted rsq` = sum$adj.r.squared)
     if (plot == F) {
       if (type == "full") {
         print(kable(tmp1, digits = 3, caption = "Each predictor statistics"))
