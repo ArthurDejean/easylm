@@ -13,7 +13,7 @@ lm_sum = function(model, plot = F, type = "full") {
   require(rsq, include.only="rsq.partial")
   require(broom, include.only=c("tidy", "glance"))
   require(knitr, include.only = c("kable", "kables"))
-  require(gt, include.only = "gt")
+  require(gt, include.only = c("gt", "fmt_number"))
   require(patchwork, include.only = c("wrap_table", "plot_layout"))
   if (class(model) == "lm") {
     sum = summary(model)
@@ -45,8 +45,8 @@ lm_sum = function(model, plot = F, type = "full") {
       }
     }
     if (plot == T) {
-      tmp1 = tmp1 |> gt() |> wrap_table(space = "free_x")
-      tmp2 = tmp2 |> gt() |> wrap_table(space = "free_x")
+      tmp1 = tmp1 |> gt() |> fmt_number(decimals = 3) |> wrap_table(space = "free_x")
+      tmp2 = tmp2 |> gt() |> fmt_number(decimals = 3) |> wrap_table(space = "free_x")
       if (type == "full") {
         return(tmp1 + tmp2 + plot_layout(nrow = 2))
       }
@@ -85,8 +85,8 @@ lm_sum = function(model, plot = F, type = "full") {
       }
     }
     if (plot == T) {
-      tmp1 = tmp1 |> gt() |> wrap_table(space = "free_x")
-      tmp2 = tmp2 |> gt() |> wrap_table(space = "free_x")
+      tmp1 = tmp1 |> gt() |> fmt_number(decimals = 3) |> wrap_table(space = "free_x")
+      tmp2 = tmp2 |> gt() |> fmt_number(decimals = 3) |> wrap_table(space = "free_x")
       if (type == "full") {
         return(tmp1 + tmp2 + plot_layout(nrow = 2))
       }
